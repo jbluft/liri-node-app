@@ -39,17 +39,17 @@ switch (arg) {
 //set params with my screen name
 
 function myTweets () {
-var params = {screen_name: 'jbluft',count:21};
+var params = {screen_name: 'dasBootKamp',count:21};
 //the "get" call taken from the npm documentation
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
  if (!error && response.statusCode === 200) {
     for (var i=0; i<tweets.length; i++){
         var timeStamp = tweets[i].created_at;
         var tweetSent = tweets[i].text;
-     console.log(tweetSent + timeStamp);
+     console.log(tweetSent + "" + timeStamp);
     //BONUS
     //this is for appending to the log.txt
-     fs.appendFile('log.txt', tweetSent, function(err) {
+     fs.appendFile('log.txt', tweetSent+" "+timeStamp+"\n", function(err) {
     });
     //END BONUS
 
