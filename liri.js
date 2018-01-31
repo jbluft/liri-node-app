@@ -53,30 +53,55 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
 }   
 //END TWITTER SECTION
 
+
+
+
+
 //SPOTIFY SECTION LETS FIND SOME MUSIC
 function spotifySong () {
-    spotify.search({ type: 'track', query: song }, function(err, data) {
-    
-        // if (!err && response.statusCode === 200) {
+
+  if (song === undefined) {
+    console.log(song);
+    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
+        console.log(data);
+    });
+  } else {
+
+  spotify.search({ type: 'track', query: song }, function(err, data) {
+
+        if (err) {
+            return console.log('Error occurred: ' + err);
+          }
             var songDetails = data.tracks.items[0];
             console.log(songDetails.artists[0].name);
             console.log(songDetails.name);
             console.log(songDetails.preview_url);
             console.log(songDetails.album.name);
-            // };
-
-            // if (err) {
-            //     return console.log('Error occurred: ' + err);
-            //   }
-    
+ 
+           
       });
-    }
+    }}
 //END SPOTIFY 
 
 //START MOVIE-THIS SECTION LETS FIND SOME MOVIE INFO
 function movieThis() {
 
-    //OMDB section
+  if (song == undefined) {
+    var song = "Mr. Nobody";
+    var queryUrl = "http://www.omdbapi.com/?t=" + song + "&y=&plot=short&apikey=trilogy";
+    request(queryUrl, function(error, response, body) {
+        console.log(JSON.parse(body).Title);
+        console.log("Release Year: " + JSON.parse(body).Year);
+        console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+        console.log("IMDB Rating: " + JSON.parse(body).Country);
+        console.log("IMDB Rating: " + JSON.parse(body).Language);
+        console.log("IMDB Rating: " + JSON.parse(body).Plot);
+        console.log("IMDB Rating: " + JSON.parse(body).Actors);
+        });
+  } else {
+
+  //OMDB section
 // Then run a request to the OMDB API with the movie specified
 
 var queryUrl = "http://www.omdbapi.com/?t=" + song + "&y=&plot=short&apikey=trilogy";
@@ -97,13 +122,18 @@ request(queryUrl, function(error, response, body) {
     console.log("IMDB Rating: " + JSON.parse(body).Actors);
   }
 
+
+
   if(error) {
     return console.error(err);
     }
 
 });
 }
+}
 //END MOVIE-THIS SECTION WE FOUND SOME MOVIE INFO
+
+
 
 //START DO-WHAT-IT-SAYS SECTION
 function whatSays() {
