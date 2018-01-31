@@ -58,3 +58,16 @@ There's a new cafeteria next door. Wed Jan 31 16:28:39 +0000 2018
 We have class 3 times a week. Wed Jan 31 16:27:11 +0000 2018
 I love my coding bootcamp Wed Jan 31 16:26:57 +0000 2018
 Hello bootcampers Wed Jan 31 16:26:46 +0000 2018
+
+Movie: Star Wars: Episode IV - A New Hope
+Release Year: 1977
+IMDB Rating: 8.7
+Rotten Tomatoes Rating: 93%
+Country: USA
+Language: English
+Plot: Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle-station while also attempting to rescue Princess Leia from the evil Darth Vader.
+Actors: Mark Hamill, Harrison Ford, Carrie Fisher, Peter Cushing
+Artist: Fall Out Boy
+Song: Uma Thurman
+Preview: null
+Album: American Beauty/American Psycho

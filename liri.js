@@ -80,7 +80,7 @@ function spotifySong () {
             return console.log('Error occurred: ' + err);
           }
             var songDetails = data.tracks.items[0];
-            console.log("Artist: "+songDetails.artists[0].name);
+            console.log(songDetails.artists[0].name);
             console.log(songDetails.name);
             console.log(songDetails.preview_url);
             console.log(songDetails.album.name);
