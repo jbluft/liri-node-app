@@ -37,7 +37,6 @@ switch (arg) {
 
 //TWITTER SECTION
 //set params with my screen name
-
 function myTweets () {
 var params = {screen_name: 'dasBootKamp',count:21};
 //the "get" call taken from the npm documentation
@@ -46,7 +45,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
     for (var i=0; i<tweets.length; i++){
         var timeStamp = tweets[i].created_at;
         var tweetSent = tweets[i].text;
-     console.log(tweetSent + "" + timeStamp);
+     console.log(tweetSent + " " + timeStamp);
     //BONUS
     //this is for appending to the log.txt
      fs.appendFile('log.txt', tweetSent+" "+timeStamp+"\n", function(err) {
@@ -54,21 +53,16 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
     //END BONUS
 
         }
-
-
-
     }
 });
 }   
 //END TWITTER SECTION
 
 
-
-
-
 //SPOTIFY SECTION LETS FIND SOME MUSIC
 function spotifySong () {
 
+  //ACE OF BASE IF NO SONG INPUT
   if (song === undefined) {
     console.log(song);
     spotify.search({ type: 'track', query: 'Ace of Base' }, function(err, data) {
@@ -79,14 +73,14 @@ function spotifySong () {
 
     });
   } else {
-
+  //IF THERE IS SONG INPUT RUN THE SEARCH
   spotify.search({ type: 'track', query: song }, function(err, data) {
 
         if (err) {
             return console.log('Error occurred: ' + err);
           }
             var songDetails = data.tracks.items[0];
-            console.log(songDetails.artists[0].name);
+            console.log("Artist: "+songDetails.artists[0].name);
             console.log(songDetails.name);
             console.log(songDetails.preview_url);
             console.log(songDetails.album.name);
@@ -96,9 +90,7 @@ function spotifySong () {
             fs.appendFile('log.txt', songAll, function(err) {
               console.log("appended to log.txt")              
             });
-            //end BONUS
- 
-           
+            //end BONUS           
       });
     }}
 //END SPOTIFY 
@@ -106,6 +98,7 @@ function spotifySong () {
 //START MOVIE-THIS SECTION LETS FIND SOME MOVIE INFO
 function movieThis() {
 
+  //CUE MR NOBODY IF NO MOVIE IS INPUT
   if (song == undefined) {
 
     var queryUrlAlt = "http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy";
@@ -154,8 +147,6 @@ request(queryUrl, function(error, response, body) {
 
   }
 
-
-
   if(error) {
     return console.error(err);
     }
@@ -180,14 +171,12 @@ fs.readFile("random.txt", "utf8", function(error, data) {
     var dataArr = data.split(",");
     // console.log(dataArr);
 
+    //restating variables
     var arg = dataArr[0];
     var song = dataArr[1];
 
-    switch (arg) {
-        case "my-tweets":
-          myTweetsB();
-          break;
-      
+    //Using same switch at above
+    switch (arg) {      
         case "spotify-this-song":
           spotifySongB();
           break;
@@ -195,10 +184,10 @@ fs.readFile("random.txt", "utf8", function(error, data) {
         case "movie-this":
           movieThisB();
           break;
-      
     }  
-   
-    //NEW SPOTIFY SECTION TO CLEAR SCOPE PROBLEM WITH PASSING THE SECOND VARIABLE    
+   //END SWITCH
+
+    //NEW SPOTIFY SECTION    
     function spotifySongB () {
         spotify.search({ type: 'track', query: song }, function(err, data) {
         
@@ -227,9 +216,7 @@ fs.readFile("random.txt", "utf8", function(error, data) {
     //SECOND MOVIE-THIS SECTION TO CLEAR SCOPE PROBLEM
     function movieThisB() {
 
-    //OMDB section
     // Then run a request to the OMDB API with the movie specified
-    
     var queryUrl = "http://www.omdbapi.com/?t=" + song + "&y=&plot=short&apikey=trilogy";
     request(queryUrl, function(error, response, body) {
     
@@ -270,4 +257,4 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 
    });
 }
-//END DO-WHAT-IT-SAYS SECTIONz
+//END DO-WHAT-IT-SAYS SECTION
