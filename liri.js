@@ -62,8 +62,12 @@ function spotifySong () {
 
   if (song === undefined) {
     console.log(song);
-    spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
-        console.log(data);
+    spotify.search({ type: 'track', query: 'Ace of Base' }, function(err, data) {
+        console.log(data.tracks.items[0].name);
+        console.log(data.tracks.items[0].artists[0].name);
+        console.log(data.tracks.items[0].preview_url);
+        console.log(data.tracks.items[0].album.name);
+
     });
   } else {
 
@@ -238,11 +242,4 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 
    });
 }
-//END DO-WHAT-IT-SAYS SECTION
-
-
-
-
-
-
-
+//END DO-WHAT-IT-SAYS SECTIONz
