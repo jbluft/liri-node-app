@@ -47,7 +47,16 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
         var timeStamp = tweets[i].created_at;
         var tweetSent = tweets[i].text;
      console.log(tweetSent + timeStamp);
+    //BONUS
+    //this is for appending to the log.txt
+     fs.appendFile('log.txt', tweetSent, function(err) {
+    });
+    //END BONUS
+
         }
+
+
+
     }
 });
 }   
@@ -81,6 +90,13 @@ function spotifySong () {
             console.log(songDetails.name);
             console.log(songDetails.preview_url);
             console.log(songDetails.album.name);
+            //BONUS
+            //this is the variable for appending to the log.txt
+            var songAll = ("\nArtist: "+songDetails.artists[0].name+ "\nSong: "+songDetails.name+"\nPreview: "+songDetails.preview_url+"\nAlbum: "+songDetails.album.name);
+            fs.appendFile('log.txt', songAll, function(err) {
+              console.log("appended to log.txt")              
+            });
+            //end BONUS
  
            
       });
@@ -91,17 +107,17 @@ function spotifySong () {
 function movieThis() {
 
   if (song == undefined) {
-    var song = "Mr. Nobody";
-    var queryUrl = "http://www.omdbapi.com/?t=" + song + "&y=&plot=short&apikey=trilogy";
-    request(queryUrl, function(error, response, body) {
+
+    var queryUrlAlt = "http://www.omdbapi.com/?t=mr+nobody&y=&plot=short&apikey=trilogy";
+    request(queryUrlAlt, function(error, response, body) {
         console.log(JSON.parse(body).Title);
         console.log("Release Year: " + JSON.parse(body).Year);
         console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
         console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-        console.log("IMDB Rating: " + JSON.parse(body).Country);
-        console.log("IMDB Rating: " + JSON.parse(body).Language);
-        console.log("IMDB Rating: " + JSON.parse(body).Plot);
-        console.log("IMDB Rating: " + JSON.parse(body).Actors);
+        console.log("Country: " + JSON.parse(body).Country);
+        console.log("Language: " + JSON.parse(body).Language);
+        console.log("Plot: " + JSON.parse(body).Plot);
+        console.log("Actors: " + JSON.parse(body).Actors);
         });
   } else {
 
@@ -120,10 +136,22 @@ request(queryUrl, function(error, response, body) {
     console.log("Release Year: " + JSON.parse(body).Year);
     console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
     console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-    console.log("IMDB Rating: " + JSON.parse(body).Country);
-    console.log("IMDB Rating: " + JSON.parse(body).Language);
-    console.log("IMDB Rating: " + JSON.parse(body).Plot);
-    console.log("IMDB Rating: " + JSON.parse(body).Actors);
+    console.log("Country: " + JSON.parse(body).Country);
+    console.log("Language: " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Actors: " + JSON.parse(body).Actors);
+
+    //BONUS
+    //this is the variable for appending to the log.txt
+    var movieAll = ("\nMovie: "+JSON.parse(body).Title+ "\nRelease Year: "+JSON.parse(body).Year+"\nIMDB Rating: "+JSON.parse(body).imdbRating+"\nRotten Tomatoes Rating: "+JSON.parse(body).Ratings[1].Value+"\nCountry: "+JSON.parse(body).Country+"\nLanguage: "+JSON.parse(body).Language+"\nPlot: "+JSON.parse(body).Plot+"\nActors: "+JSON.parse(body).Actors);
+    //end variable for log.txt
+    //append function to send the variable to the log.txt file
+    fs.appendFile('log.txt', movieAll, function(err) {
+      console.log("appended to log.txt")              
+    });
+    //end append function for log.txt
+    //END BONUS
+
   }
 
 
@@ -174,39 +202,27 @@ fs.readFile("random.txt", "utf8", function(error, data) {
     function spotifySongB () {
         spotify.search({ type: 'track', query: song }, function(err, data) {
         
-            // if (!err && response.statusCode === 200) {
                 var songDetails = data.tracks.items[0];
                 console.log(songDetails.artists[0].name);
                 console.log(songDetails.name);
                 console.log(songDetails.preview_url);
                 console.log(songDetails.album.name);
-                // };
+                
+                //BONUS
+                //this is the variable for appending to the log.txt
+                var songAll = ("Artist: "+songDetails.artists[0].name+ "\nSong: "+songDetails.name+"\nPreview: "+songDetails.preview_url+"\nAlbum: "+songDetails.album.name);
+                fs.appendFile('log.txt', songAll, function(err) {
+                  console.log("appended to log.txt")              
+                });
+                //END BONUS
     
-                // if (err) {
-                //     return console.log('Error occurred: ' + err);
-                //   }
+                if (err) {
+                    return console.log('Error occurred: ' + err);
+                  }
         
           });
         }
     //END SECOND SPOTIFY SECTION
-
-    //TWITTER SECTION AGAIN BECAUSE OF SCOPE ISSUE
-    //set params with my screen name
-
-    function myTweetsB () {
-        var params = {screen_name: 'jbluft',count:21};
-        //the "get" call taken from the npm documentation
-        client.get('statuses/user_timeline', params, function(error, tweets, response) {
-        if (!error && response.statusCode === 200) {
-        for (var i=0; i<tweets.length; i++){
-        var timeStamp = tweets[i].created_at;
-        var tweetSent = tweets[i].text;
-        console.log(tweetSent + timeStamp);
-            }
-            }
-        });
-    }      
-        //END TWITTER AGAIN SECTION
     
     //SECOND MOVIE-THIS SECTION TO CLEAR SCOPE PROBLEM
     function movieThisB() {
@@ -230,6 +246,18 @@ fs.readFile("random.txt", "utf8", function(error, data) {
         console.log("IMDB Rating: " + JSON.parse(body).Language);
         console.log("IMDB Rating: " + JSON.parse(body).Plot);
         console.log("IMDB Rating: " + JSON.parse(body).Actors);
+
+      //BONUS
+      //this is the variable for appending to the log.txt
+      var movieAll = ("Movie: "+JSON.parse(body).Title+ "\nRelease Year: "+JSON.parse(body).Year+"\nIMDB Rating: "+JSON.parse(body).imdbRating+"\nRotten Tomatoes Rating: "+JSON.parse(body).Ratings[1].Value+"\nCountry: "+JSON.parse(body).Country+"\nLanguage: "+JSON.parse(body).Language+"\nPlot: "+JSON.parse(body).Plot+"\nActors: "+JSON.parse(body).Actors);
+      //end variable for log.txt
+      //append function to send the variable to the log.txt file
+      fs.appendFile('log.txt', movieAll, function(err) {
+      console.log("appended to log.txt")              
+      });
+    //end append function for log.txt
+    //END BONUS
+
       }
     
       if(error) {
