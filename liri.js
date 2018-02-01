@@ -23,11 +23,11 @@ switch (arg) {
       break;
   
     case "spotify-this-song":
-      spotifySong();
+      spotifySong(song);
       break;
   
     case "movie-this":
-      movieThis();
+      movieThis(song);
       break;
   
     case "do-what-it-says":
@@ -60,7 +60,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
 
 //SPOTIFY SECTION LETS FIND SOME MUSIC
-function spotifySong () {
+function spotifySong (song) {
 
   //ACE OF BASE IF NO SONG INPUT
   if (song === undefined) {
@@ -96,7 +96,7 @@ function spotifySong () {
 //END SPOTIFY 
 
 //START MOVIE-THIS SECTION LETS FIND SOME MOVIE INFO
-function movieThis() {
+function movieThis(song) {
 
   //CUE MR NOBODY IF NO MOVIE IS INPUT
   if (song == undefined) {
@@ -179,105 +179,18 @@ fs.readFile("random.txt", "utf8", function(error, data) {
     switch (arg) {      
         
         case "my-tweets":
-        myTweetsB();
+        myTweets();
         break;
 
-          case "spotify-this-song":
-          spotifySongB();
-          break;
+        case "spotify-this-song":
+        spotifySong(dataArr[1]);
+        break;
       
         case "movie-this":
-          movieThisB();
-          break;
+        movieThis(dataArr[1]);
+        break;
     }  
    //END SWITCH
-
-   //NEW TWITTER SECTION
-  //set params with my screen name
-  function myTweetsB () {
-    var params = {screen_name: 'dasBootKamp',count:21};
-    //the "get" call taken from the npm documentation
-    client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    if (!error && response.statusCode === 200) {
-      for (var i=0; i<tweets.length; i++){
-          var timeStamp = tweets[i].created_at;
-          var tweetSent = tweets[i].text;
-       console.log(tweetSent + " " + timeStamp);
-      //BONUS
- 
-          }
-      }
-  });
-  }   
-  //END TWITTER SECTION
-
-    //NEW SPOTIFY SECTION    
-    function spotifySongB () {
-        spotify.search({ type: 'track', query: song }, function(err, data) {
-        
-                var songDetails = data.tracks.items[0];
-                console.log(songDetails.artists[0].name);
-                console.log(songDetails.name);
-                console.log(songDetails.preview_url);
-                console.log(songDetails.album.name);
-                
-                //BONUS
-                //this is the variable for appending to the log.txt
-                var songAll = ("Artist: "+songDetails.artists[0].name+ "\nSong: "+songDetails.name+"\nPreview: "+songDetails.preview_url+"\nAlbum: "+songDetails.album.name);
-                fs.appendFile('log.txt', songAll, function(err) {
-                  console.log("appended to log.txt")              
-                });
-                //END BONUS
-    
-                if (err) {
-                    return console.log('Error occurred: ' + err);
-                  }
-        
-          });
-        }
-    //END SECOND SPOTIFY SECTION
-    
-    //SECOND MOVIE-THIS SECTION TO CLEAR SCOPE PROBLEM
-    function movieThisB() {
-
-    // Then run a request to the OMDB API with the movie specified
-    var queryUrl = "http://www.omdbapi.com/?t=" + song + "&y=&plot=short&apikey=trilogy";
-    request(queryUrl, function(error, response, body) {
-    
-      // If the request is successful
-      if (!error && response.statusCode === 200) {
-    
-        // Parse the body of the site and recover just the imdbRating
-        // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-        console.log(JSON.parse(body).Title);
-        console.log("Release Year: " + JSON.parse(body).Year);
-        console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-        console.log("IMDB Rating: " + JSON.parse(body).Country);
-        console.log("IMDB Rating: " + JSON.parse(body).Language);
-        console.log("IMDB Rating: " + JSON.parse(body).Plot);
-        console.log("IMDB Rating: " + JSON.parse(body).Actors);
-
-      //BONUS
-      //this is the variable for appending to the log.txt
-      var movieAll = ("Movie: "+JSON.parse(body).Title+ "\nRelease Year: "+JSON.parse(body).Year+"\nIMDB Rating: "+JSON.parse(body).imdbRating+"\nRotten Tomatoes Rating: "+JSON.parse(body).Ratings[1].Value+"\nCountry: "+JSON.parse(body).Country+"\nLanguage: "+JSON.parse(body).Language+"\nPlot: "+JSON.parse(body).Plot+"\nActors: "+JSON.parse(body).Actors);
-      //end variable for log.txt
-      //append function to send the variable to the log.txt file
-      fs.appendFile('log.txt', movieAll, function(err) {
-      console.log("appended to log.txt")              
-      });
-    //end append function for log.txt
-    //END BONUS
-
-      }
-    
-      if(error) {
-        return console.error(err);
-        }
-    
-    });
-    }
-//END SECOND MOVIE-THIS SECTION
 
    });
 }
