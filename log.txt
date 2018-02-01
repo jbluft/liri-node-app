@@ -46,3 +46,31 @@ Actors: Sylvester Stallone, Talia Shire, Burt Young, Carl WeathersArtist: Ed She
 Song: Shape of You
 Preview: https://p.scdn.co/mp3-preview/84462d8e1e4d0f9e5ccd06f0da390f65843774a2?cid=1181a73a1de5497d9c8521b6f7e39f4f
 Album: Shape of You
+Movie: Rocky
+Release Year: 1976
+IMDB Rating: 8.1
+Rotten Tomatoes Rating: 93%
+Country: USA
+Language: English
+Plot: Rocky Balboa, a small-time boxer, gets a supremely rare chance to fight heavy-weight champion Apollo Creed in a bout in which he strives to go the distance for his self-respect.
+Actors: Sylvester Stallone, Talia Shire, Burt Young, Carl Weathers
+Movie: Star Wars: Episode IV - A New Hope
+Release Year: 1977
+IMDB Rating: 8.7
+Rotten Tomatoes Rating: 93%
+Country: USA
+Language: English
+Plot: Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle-station while also attempting to rescue Princess Leia from the evil Darth Vader.
+Actors: Mark Hamill, Harrison Ford, Carrie Fisher, Peter Cushing
+Artist: Mark Ronson
+Song: Uptown Funk
+Preview: https://p.scdn.co/mp3-preview/88a794d97fcb4475f72a27be7baf71b94d5a9dda?cid=1181a73a1de5497d9c8521b6f7e39f4f
+Album: Uptown Special
+Artist: Rush
+Song: Tom Sawyer
+Preview: null
+Album: Moving Pictures (2011 Remaster)
+Artist: Fall Out Boy
+Song: Centuries
+Preview: null
+Album: American Beauty/American Psycho

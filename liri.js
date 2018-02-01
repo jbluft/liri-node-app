@@ -177,7 +177,12 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 
     //Using same switch at above
     switch (arg) {      
-        case "spotify-this-song":
+        
+        case "my-tweets":
+        myTweetsB();
+        break;
+
+          case "spotify-this-song":
           spotifySongB();
           break;
       
@@ -186,6 +191,25 @@ fs.readFile("random.txt", "utf8", function(error, data) {
           break;
     }  
    //END SWITCH
+
+   //NEW TWITTER SECTION
+  //set params with my screen name
+  function myTweetsB () {
+    var params = {screen_name: 'dasBootKamp',count:21};
+    //the "get" call taken from the npm documentation
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    if (!error && response.statusCode === 200) {
+      for (var i=0; i<tweets.length; i++){
+          var timeStamp = tweets[i].created_at;
+          var tweetSent = tweets[i].text;
+       console.log(tweetSent + " " + timeStamp);
+      //BONUS
+ 
+          }
+      }
+  });
+  }   
+  //END TWITTER SECTION
 
     //NEW SPOTIFY SECTION    
     function spotifySongB () {
